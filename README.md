@@ -9,7 +9,10 @@ NOTA: La aplicacion ya esta esta live en AWS. Para probar los servicios descarga
 2. Generar el compilado de typeScript que sera subido a los lambdas
   npm run build
 
-3. Ejecutar dummies para ejecutar funciones creadas
+3. Ejecuta linter
+  npm run lint
+
+4. Ejecutar dummies para ejecutar funciones creadas
   npm run generate-token-dummy
   npm run get-card-dummy
 

@@ -1,7 +1,6 @@
 
 import { APIGatewayProxyResult } from "aws-lambda";
 import {
-  sendSuccessfulResponse,
   sendInternalServerErrorResponse,
   sendBadRequestResponse,
   sendForbiddenErrorResponse,

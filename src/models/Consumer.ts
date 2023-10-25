@@ -1,4 +1,4 @@
-import { Document, Schema, Model, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI, {})
 

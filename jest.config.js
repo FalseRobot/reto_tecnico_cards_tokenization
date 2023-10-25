@@ -1,5 +1,5 @@
 module.exports = {
-    testMatch: ['**/src/ut.ts'],
+    testMatch: ['**/src/tests/generateToken.ts'],
     preset: 'ts-jest',
     testEnvironment: 'node',
     coverageDirectory: 'coverage',

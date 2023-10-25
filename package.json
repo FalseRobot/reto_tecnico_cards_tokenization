@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
+    "lint": "eslint 'src/**/*.{ts,js}'",
     "generate-token-dummy": "node dist/src/dummies/generateToken.js",
     "get-card-dummy": "node dist/src/dummies/getCard.js"
   },
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.6",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
     "eslint": "^8.52.0",
     "jest": "^29.7.0",
     "lint-staged": "^15.0.2",

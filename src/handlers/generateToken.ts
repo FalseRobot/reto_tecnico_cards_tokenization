@@ -172,7 +172,6 @@ const addCardToDatabase = async (
   let wasAdded = false
   let token = ''
   try {
-    let wasAdded = false
     const createdAt = new Date()
     token = generateRandomValue(16)
     // Create a new card document
