@@ -16,3 +16,6 @@ NOTA: La aplicacion ya esta esta live en AWS. Para probar los servicios descarga
   npm run generate-token-dummy
   npm run get-card-dummy
 
+mongoDB:
+se creo un cluster free shared,y para el feature de expiracion se creo un index con TTL activo. Los documentos son eliminados pasados 15 minutos de creacion.
+
