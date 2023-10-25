@@ -28,6 +28,8 @@ Código fuente para la validación de tarjetas de crédito con el algoritmo de L
 
 **Base de datos MongoDB:**
 
+MongoDB URI: mongodb+srv://admin2:vybhdZVN9m@cluster0.gywv7oz.mongodb.net/tokenizacion_tarjetas
+
 Se ha configurado un clúster gratuito shared de MongoDB. Además, se ha creado un índice con TTL activo para el componente de expiración. Los documentos "cards" se eliminarán automáticamente después de 15 minutos de su creación.
 
 **Validación de PK (Primary Key):**
