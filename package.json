@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
+    "build": "tsc",
     "test": "jest",
-    "lint": "eslint src",
-    "generate-token-dummy": "node dist/src/dummies/generateToken.js"
+    "generate-token-dummy": "node dist/src/dummies/generateToken.js",
+    "get-card-dummy": "node dist/src/dummies/getCard.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,10 +16,13 @@
     "@types/serverless": "^3.12.17",
     "mongoose": "^7.6.3",
     "serverless": "^3.35.2",
+    "serverless-offline": "^13.2.0",
     "serverless-plugin-typescript": "^2.1.5",
+    "serverless-ssm-fetch": "^2.0.0",
     "tsc": "^2.0.4"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.6",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "eslint": "^8.52.0",
     "jest": "^29.7.0",

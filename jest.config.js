@@ -1,4 +1,5 @@
 module.exports = {
+    testMatch: ['**/src/ut.ts'],
     preset: 'ts-jest',
     testEnvironment: 'node',
     coverageDirectory: 'coverage',

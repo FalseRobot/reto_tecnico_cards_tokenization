@@ -1,6 +1,6 @@
 import { Document, Schema, Model, model } from 'mongoose';
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://admin2:vybhdZVN9m@cluster0.gywv7oz.mongodb.net/tokenizacion_tarjetas', {})
+mongoose.connect(process.env.MONGODB_URI, {})
 
 const cardSchema = new Schema({
   card_number: String,
@@ -9,6 +9,7 @@ const cardSchema = new Schema({
   expiration_year: String,
   email: String,
   createdAt: Date,
+  token: String
 });
 
 const Card = model('Card', cardSchema);

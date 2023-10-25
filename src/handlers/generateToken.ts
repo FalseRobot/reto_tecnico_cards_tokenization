@@ -4,9 +4,12 @@ import {
   sendSuccessfulResponse,
   sendInternalServerErrorResponse,
   sendBadRequestResponse,
+  sendForbiddenErrorResponse
 } from "./../helpers/general";
 import { isLuhnValid, cleanProposed } from "./../helpers/luhn";
+import Consumer from "./../models/Consumer";
 import Card from "./../models/Card";
+
 
 export type generateTokenAPIGatewayProxyEvent = {
   card_number: number;
@@ -14,6 +17,7 @@ export type generateTokenAPIGatewayProxyEvent = {
   expiration_month: string;
   expiration_year: string;
   email: string;
+  auth_header: string
 };
 
 export const lambda_handler = async (
@@ -21,8 +25,17 @@ export const lambda_handler = async (
 ): Promise<APIGatewayProxyResult> => {
   console.log("Event: ", event);
   try {
-    const { email, card_number, cvv, expiration_year, expiration_month } =
+    const { email, card_number, cvv, expiration_year, expiration_month, auth_header } =
       event;
+    const [, pk] = auth_header.split(' ')
+    const authValidation = await isAuthHeaderValid(pk)
+    if(!authValidation) {
+      console.log("Invalid Auth Header");
+      return sendForbiddenErrorResponse(
+        'PK Invalido! Comercio No Permitido'
+      );
+    }
+    console.log("Auth Header OK");
 
     const validationResult = isValidCreditCard(
       card_number,
@@ -49,9 +62,11 @@ export const lambda_handler = async (
       email
     );
 
-    if (!insertResult)
+    if (!insertResult.wasAdded) {
       return sendInternalServerErrorResponse("Failed to insert into Database");
-    return sendSuccessfulResponse("Token Generated Successfully!");
+    }
+      
+    return sendSuccessfulResponse(`Token Generated Successfully! Your token is ${insertResult.token}`);
   } catch (error) {
     console.error("Error:", error);
     return sendInternalServerErrorResponse("Internal Server Error");
@@ -130,34 +145,79 @@ const isValidEmail = (email: string): boolean => {
   return email.length >= 5 && email.length <= 100;
 };
 
+const generateRandomValue = (length) => {
+  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let randomValue = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomValue += characters.charAt(randomIndex);
+  }
+
+  return randomValue;
+}
+
+type InsertResult = {
+  wasAdded: boolean;
+  token: string;
+};
+
 const addCardToDatabase = async (
   card_number: number,
   cvv: number,
   expiration_month: string,
   expiration_year: string,
   email: string
-): Promise<boolean> => {
+): Promise<InsertResult> => {
+  let wasAdded = false
+  let token = ''
   try {
+    let wasAdded = false
     const createdAt = new Date()
+    token = generateRandomValue(16)
     // Create a new card document
     const newCard = new Card({
       card_number: card_number.toString(),
       cvv: cvv.toString(),
-      expiration_month: expiration_month,
-      expiration_year: expiration_year,
-      email: email,
-      createdAt: createdAt
+      expiration_month,
+      expiration_year,
+      email,
+      createdAt,
+      token
     });
 
     console.log('new card: ', newCard)
     // Save the new card to the database
     await newCard.save();
+    wasAdded = true
 
-    // If the card was successfully saved, return true
-    return true;
+    return {
+      wasAdded,
+      token,
+    };
   } catch (error) {
     // If there's an error, return false
     console.error("Error adding card to the database:", error);
-    return false;
+    return {
+      wasAdded,
+      token: '',
+    };
+  }
+};
+
+const isAuthHeaderValid = async (authHeader: string):Promise<boolean> => {
+  try {
+    console.log('to check', authHeader)
+    const consumer = await Consumer.findOne({ pk: authHeader}).exec();
+    if (consumer) {
+      console.log('Consumer found!', consumer);
+      return true;
+    } else {
+      console.log('Consumer not found for pk:', authHeader);
+      return false;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return false
   }
 };

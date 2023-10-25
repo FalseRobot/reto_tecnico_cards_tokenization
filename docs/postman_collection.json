@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "220ebc85-b141-43bf-a570-e7ce607237a4",
+		"name": "Tokenizacion Tarjetas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9397244"
+	},
+	"item": [
+		{
+			"name": "Generate Token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "pk_test_12345",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"rpenilla00@yahoo.com\",\n    \"card_number\": \"5118420413040344\",\n    \"cvv\": \"7682\",\n    \"expiration_year\": \"2025\",\n    \"expiration_month\": \"01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://eh451wptbh.execute-api.us-east-1.amazonaws.com/dev/tokens",
+					"protocol": "https",
+					"host": [
+						"eh451wptbh",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Card",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "pk_test_12345",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://eh451wptbh.execute-api.us-east-1.amazonaws.com/dev/card/:token",
+					"protocol": "https",
+					"host": [
+						"eh451wptbh",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"card",
+						":token"
+					],
+					"variable": [
+						{
+							"key": "token",
+							"value": "asdas"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

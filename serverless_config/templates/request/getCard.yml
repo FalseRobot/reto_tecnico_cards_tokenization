@@ -1,0 +1,5 @@
+|
+  { 
+    "token": "$input.params('token')",
+    "auth_header": "$util.escapeJavaScript($input.params().header.get('Authorization'))"
+  }

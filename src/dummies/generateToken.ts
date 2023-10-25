@@ -9,6 +9,7 @@ const body: generateTokenAPIGatewayProxyEvent = {
   cvv: 123,
   expiration_year: "2025",
   expiration_month: "09",
+  auth_header: "Bearer pk_test_12345"
 };
 
 console.log(">>> Starting lambda execution ...");

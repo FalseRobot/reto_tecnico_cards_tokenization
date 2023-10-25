@@ -18,6 +18,24 @@ export const sendInternalServerErrorResponse = (
   };
 };
 
+export const sendForbiddenErrorResponse = (
+  message: string
+): APIGatewayProxyResult => {
+  return {
+    statusCode: 403,
+    body: JSON.stringify({ message: `${message}` }),
+  };
+};
+
+export const sendNotFoundErrorResponse = (
+  message: string
+): APIGatewayProxyResult => {
+  return {
+    statusCode: 404,
+    body: JSON.stringify({ message: `${message}` }),
+  };
+};
+
 export const sendBadRequestResponse = (
   message: string
 ): APIGatewayProxyResult => {

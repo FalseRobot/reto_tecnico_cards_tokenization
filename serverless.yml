@@ -17,15 +17,20 @@ package:
     - "!eslintrc.js"
     - "!README.md"
     - "!reto.pdf"
+    - "!docs/**"
     # - "!src/**"
 
 plugins:
   - serverless-functions-base-path
   - serverless-iam-roles-per-function
   - serverless-plugin-typescript
+  - serverless-ssm-fetch
 
 custom:
   functionsBasePath: src/handlers
+  serverlessSsmFetch:
+    MONGODB_URI: /cards_tokenization_mongodb~true
 
 functions:
   - ${file(./serverless_config/functions/generateToken.yml)}
+  - ${file(./serverless_config/functions/getCard.yml)}
