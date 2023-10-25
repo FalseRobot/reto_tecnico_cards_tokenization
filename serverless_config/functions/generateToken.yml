@@ -1,0 +1,24 @@
+generateToken:
+  handler: generateToken.lambda_handler
+  description: Generate Token
+  timeout: 15
+  package:
+    patterns:
+      - src/handlers/generateToken.ts
+      - src/helpers/**
+  events:
+    - http:
+        path: /tokens
+        integration: lambda
+        method: post
+        cors: true
+        request:
+          template: 
+            application/json: ${file(./serverless_config/templates/request/generateToken.yml)}
+          schemas:
+            application/json: 
+              name: generateToken
+              description: 'Generate Token'
+              schema: ${file(./serverless_config/models/generateToken.json)}
+        response:
+          template: ${file(./serverless_config/templates/response/template.yml)}

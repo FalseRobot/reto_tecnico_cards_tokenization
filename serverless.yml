@@ -1,0 +1,31 @@
+
+service: reto-tecnico-cards-tokenization
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+package:
+  individually: true
+  patterns:
+    - "!node_modules/**"
+    - "!.serverless/**"
+    - "!package-lock.json"
+    - "!tsconfig.json"
+    - "!package.json"
+    - "!eslintrc.js"
+    - "!README.md"
+    - "!reto.pdf"
+    # - "!src/**"
+
+plugins:
+  - serverless-functions-base-path
+  - serverless-iam-roles-per-function
+  - serverless-plugin-typescript
+
+custom:
+  functionsBasePath: src/handlers
+
+functions:
+  - ${file(./serverless_config/functions/generateToken.yml)}

@@ -1,0 +1,36 @@
+{
+  "name": "reto-tecnico-cards-tokenization",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "jest",
+    "lint": "eslint src",
+    "generate-token-dummy": "node dist/src/dummies/generateToken.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.125",
+    "@types/serverless": "^3.12.17",
+    "mongoose": "^7.6.3",
+    "serverless": "^3.35.2",
+    "serverless-plugin-typescript": "^2.1.5",
+    "tsc": "^2.0.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "eslint": "^8.52.0",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "serverless-functions-base-path": "^1.0.33",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "0.0.1-alpha.0"
+  }
+}

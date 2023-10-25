@@ -1,0 +1,9 @@
+|
+  #set($inputRoot = $input.path('$'))
+  {
+    "email": "$inputRoot.email",
+    "card_number": "$inputRoot.card_number",
+    "cvv": $inputRoot.cvv,
+    "expiration_year": "$inputRoot.expiration_year",
+    "expiration_month": "$inputRoot.expiration_month"
+  }

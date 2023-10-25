@@ -1,2 +1,2 @@
-# reto_tecnico_cards_tokenization
-AWS Lambda on TypeScript connect to MongoDB 
+Referencias:
+https://github.com/tolbon/luhn-ts/blob/master/src/luhn.ts
