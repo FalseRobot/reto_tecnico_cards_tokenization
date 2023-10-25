@@ -1,27 +1,37 @@
 
+**Referencias para el desarrollo de la aplicación:**
 
-Referencias:
-https://github.com/tolbon/luhn-ts/blob/master/src/luhn.ts
+Código fuente para la validación de tarjetas de crédito con el algoritmo de Luhn: https://github.com/tolbon/luhn-ts/blob/master/src/luhn.ts
 
-NOTA: La aplicacion ya esta esta live en AWS. Para probar los servicios descargarse e importar el archivo postman_collection.json de la carpeta docs.
+**Nota importante: La aplicación ya está en vivo en AWS. Para probar los servicios, sigue estos pasos:**
 
-1. Instalar dependencias de la app
-  npm install
+1. Instala las dependencias de la aplicación:
+   ```
+   npm install
+   ```
 
-2. Generar el compilado de typeScript que sera subido a los lambdas
-  npm run build
+2. Genera la compilación de TypeScript que se cargará en las funciones Lambda:
+   ```
+   npm run build
+   ```
 
-3. Ejecuta linter
-  npm run lint
+3. Ejecuta el linter para asegurar la calidad del código:
+   ```
+   npm run lint
+   ```
 
-4. Ejecutar dummies para ejecutar funciones creadas
-  npm run generate-token-dummy
-  npm run get-card-dummy
+4. Ejecuta los comandos dummies para probar las funciones creadas:
+   ```
+   npm run generate-token-dummy
+   npm run get-card-dummy
+   ```
 
-mongoDB:
-se creo un cluster free shared,y para el feature de expiracion se creo un index con TTL activo. Los documentos son eliminados pasados 15 minutos de creacion.
+**Base de datos MongoDB:**
 
-Valudacion de PK:
-el reto menciona que se debe enviar un PK en Authorization en formato Bearer, para efectos de la funcionabilidad mencionada en el reto se creo un collection llamado consumer con ese pk. Solo los comercios que tengan su pk registrado en mongodb podran consumir las apis ...
-para efectos de simpleza el PK funcional es : pk_test_12345 (enviar en formato Bearer)
-cualquier otro Pk enviado el servicio rechazara el consumo del servicio
+Se ha configurado un clúster gratuito shared de MongoDB. Además, se ha creado un índice con TTL activo para el componente de expiración. Los documentos "cards" se eliminarán automáticamente después de 15 minutos de su creación.
+
+**Validación de PK (Primary Key):**
+
+El reto menciona enviar una clave principal (PK) en la cabecera de Autorización en formato Bearer. Para que las funciones de la aplicación funcionen correctamente, se ha creado una colección llamada "consumer" para registrar estas claves. Solo los comercios que tengan sus claves registradas en MongoDB podrán consumir las APIs.
+
+Para simplificar, la PK funcional es: `pk_test_12345` (debe enviarse en el formato Bearer). Cualquier otra PK será rechazada por el servicio.
